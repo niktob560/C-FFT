@@ -8,6 +8,8 @@ else
     INFO="Checked $1"
 fi
 
+echo -e "\033[1;33mCERT CHECK:\033[0m"
+
 if [[ -z "$CERT" ]]; then
     printf '\033[1;32m'
     CERT="OK"
@@ -15,4 +17,4 @@ else
     printf '\033[1;34m'
 fi
 
-echo -e "CERT CHECK: \n$INFO\n"$CERT'\033[0m'
+echo -e "$INFO\n"$CERT'\033[0m'
