@@ -11,12 +11,20 @@
 
 double sig1(const uint32_t n)
 {
-    return cos((2 * M_PI * 1400.0 * n) / FS + (M_PI / 4)) + 2 * cos(((2 * M_PI * 10000.0 * n) / FS) + (M_PI / 2)) + cos(((2 * M_PI * 14000.0 * n) / FS) + (M_PI / 2));
+    /*sig1*/
+    /* return cos((2 * M_PI * 1400.0 * n) / FS + (M_PI / 4)) + 2 * cos(((2 * M_PI * 10000.0 * n) / FS) + (M_PI / 2)) + cos(((2 * M_PI * 14000.0 * n) / FS) + (M_PI / 2)); */
+    /*sig2*/
+    return 0.5 * cos((2 * M_PI * 1395.0 * n) / FS + (M_PI / 4)) + 2 * cos(((2 * M_PI * 10000.0 * n) / FS) + (M_PI / 2)) + 0.5 * cos(((2 * M_PI * 14015.0 * n) / FS) + (M_PI / 2));
 }
 
 complex double Wn(const uint32_t N)
 {
     return cexp(-2 * M_PI * I / N);
+}
+
+long double hemming(const uint32_t n)
+{
+    return 0.54 - 0.46 * cos((2.0 * M_PI * n) / (NN - 1));
 }
 
 complex double Xm(const uint32_t m)
@@ -46,7 +54,14 @@ int main()
     for (i = 0; i < NN; i++)
     {
         x = Xm(i);
-        printf("%f %f\n", i * FS / NN, 2 * cabs(x) / NN);
+        /* print real and imagine parts */
+        printf("%d %f+%fi\n", i, creal(x), cimag(x));
+
+        /* print AFC */
+        /* printf("%f %f\n", i * FS / NN, 2 * cabs(x) / NN); */
+
+        /* print PFC */
+        /* printf("%f %f\n", i * FS / NN, carg(x) * 180 / M_PI); */
     }
     return 0;
 }
